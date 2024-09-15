@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="StayHealthy.at - Katharina Stiassny">
+    <meta name="keywords" content="Katharina Stiassny, Burnout, Prophylaxe, Prävention, vorbeugen, gesund, leistungsfähig, Stay Healthy, Ausweg, Hilfe, Training, Trainer, Beratung, Entspannung, Entspannungstraining, Stress, Stressmanagement, Zeitmanagement, durchstarten">
+    <title>StayHealthy.at - Katharina Stiassny</title>
+  
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding-bottom: 3cm; /* Ensure space for contact section */
+        }
+        .navbar {
+            height: 4cm;
+            background-color: white;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow under the navbar */
+        }
+        .navbar img {
+            height: 80%;
+        }
+        .menu-btn {
+            font-size: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #333;
+        }
+        .menu-btn:focus {
+            outline: none;
+        }
+        .side-menu {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #d5463c;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 101;
+        }
+        .side-menu a {
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+        .side-menu a:hover {
+            background-color: #f16a60;
+        }
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            padding: 5cm 20px 20px 20px;
+        }
+        .main-content .text-section {
+            width: 65%; /* Make text section wider to give more space */
+            margin-right: 60px; /* Adds more space between text and images */
+        }
+        .main-content .text-section p {
+            margin-bottom: 20px;
+        }
+        .main-content .image-section {
+            width: 30%; /* Reduced to balance the layout */
+            display: flex;
+            flex-direction: column; /* Ensure the images stay centered vertically */
+            align-items: center; /* Center images horizontally */
+        }
+        .main-content .image-section img {
+            width: 200px;
+            height: 300px;
+            border-radius: 15px;
+            border: 2px solid #d5463c;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow to images */
+            margin-bottom: 20px; /* Space between images */
+            transition: transform 0.3s ease; /* Smooth hover effect */
+        }
+        .main-content .image-section img:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+        /* Quote styling */
+        .quote-section {
+            background-color: #d5463c;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-style: italic;
+            width: 100%; /* Ensure it fits the width of the text section */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the quote box */
+        }
+
+        /* Colourline styling */
+        #colourline {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            background: url('images/colorline.jpg') repeat-x; /* Repeat horizontally */
+            z-index: 98;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            height: 3cm;
+            background-color: white;
+            border-top: 1px solid #d5463c;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Shadow from the top */
+            position: fixed;
+            bottom: -3cm; /* Initially hidden off-screen */
+            left: 0;
+            right: 0;
+            z-index: 99;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: bottom 0.5s ease; /* Smooth slide-in transition */
+        }
+        .contact-section div {
+            margin: 0 10px;
+        }
+        .contact-section a {
+            color: #d5463c;
+            text-decoration: none;
+        }
+        .contact-section a:hover {
+            text-decoration: underline;
+        }
+        .contact-section p {
+            margin: 5px 0;
+        }
+        .contact-section .contact-item {
+            margin: 0 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <img src="images/logo.png" alt="Logo">
+        <button class="menu-btn" onclick="toggleMenu()">Menu ☰</button>
+    </div>
+
+    <!-- Slide-in Side Menu -->
+    <div id="sideMenu" class="side-menu">
+        <a href="javascript:void(0)" onclick="toggleMenu()">Close &times;</a>
+        <a href="index.html">Menü</a>
+        <a href="neues.html">Neues</a>
+        <a href="burnout.html">Burnout</a>
+        <a href="entspannung.html">Entspannung</a>
+        <a href="erneahrung.html">Ernährung</a>
+        <a href="nordic-walking.html">Nordic Walking</a>
+        <a href="ueber-mich.html">Über mich</a>
+        <a href="">Kontakt</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Text Section with Quote -->
+        <div class="text-section">
+            <!-- Quote Section -->
+
+<p><b>Nordic Walking</b></p>
+            <p>Diese Aussage erschreckt Sie? Sie macht Ihnen Angst? Mit Recht! Der Gedanke daran ist auch unangenehm. Doch, wenn Sie den Satz ein zweites Mal lesen, werden Sie erkennen, dass es von bestimmten Umständen abhängt, ob Jemand ein Burnout-Syndrom bekommt oder nicht. Umständen, die man erkennen, beeinflussen und gegebenenfalls verändern kann. Und das ist die gute Nachricht daran!</p>
+            <p>Sie selbst, und zwar wirklich nur Sie selbst, können Ihr Schicksal, Ihren Erfolg, Ihr Glück und Ihre Gesundheit positiv beeinflussen!</p>
+            <p>Auch für Stress gilt: Die Dosis macht das Gift! Kurzfristig ein wenig Stress zu haben können wir gut verkraften. Dauert diese Belastung jedoch an, oder ist sie besonders schwerwiegend, macht sie krank. Man ist plötzlich viel anfälliger für z.B. Infektionen, grippale Infekte,... Und auch die Psyche kann dem Druck nicht endlos standhalten und gerät aus dem Gleichgewicht. Daher ist es besonders in unserer schnelllebigen Zeit wichtig, Vorsorge zu treffen. </p>
+            <p>Gerne möchte ich Sie dafür ein kurzes Stück auf Ihrem Weg begleiten, Sie dabei unterstützen Ihre eigenen Stressverstärker und Schwachstellen erkennen zu können und anschließend zu verändern. Ich stelle Ihnen Methoden vor, die Sie jederzeit selbständig anwenden können. Mit diesem Rüstzeug und dem Wissen über die drohenden Gefahren können Sie Ihre Zukunft gesundheitsförderlich nach Ihren eigenen Vorstellungen gestalten.</p>
+            <p>Sie möchten mehr erfahren? Die Antworten auf einige Ihrer Fragen werden sich eventuell auf der Homepage finden. Zögern Sie bitte nicht und kontaktieren Sie mich! Sehr gerne stehe ich für weitere Fragen und eine Zusammenarbeit zur Verfügung!</p>
+           <p><b>Ich freue mich auf Sie!</b></p>
+        </div>
+
+        <!-- Image Section -->
+        <div class="image-section">
+            <img src="images/NW_1.jpg" alt="Image 1">
+            <img src="images/NW_2.jpg" alt="Image 2">
+        </div>
+    </div>
+
+    <!-- Colourline Image -->
+    <div id="colourline"></div>
+
+    <!-- Contact Section -->
+    <div class="contact-section" id="contactSection">
+        <div class="contact-item">
+            <p>Telefon: <a href="tel:+436763400880">0676/34 00 880</a></p>
+        </div>
+        <div class="contact-item">
+            <p>Firmensitz: Universumstraße 64/27, 1200 Wien</p>
+        </div>
+        <div class="contact-item">
+            <p>Email: <a href="mailto:office@stayhealthy.at">office@stayhealthy.at</a></p>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            if (sideMenu.style.width === '0px' || sideMenu.style.width === '') {
+                sideMenu.style.width = '250px';
+            } else {
+                sideMenu.style.width = '0px';
+            }
+        }
+
+        // Show the contact section with smooth slide-in effect
+        window.addEventListener('scroll', function() {
+            const contactSection = document.getElementById('contactSection');
+            const scrollPosition = window.innerHeight + window.scrollY;
+            const pageHeight = document.body.offsetHeight;
+            
+            if (scrollPosition >= pageHeight - 10) {
+                contactSection.style.bottom = '0'; // Slide in
+            } else {
+                contactSection.style.bottom = '-3cm'; // Slide out
+            }
+        });
+    </script>
+
+</body>
+</html>
