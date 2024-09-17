@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="StayHealthy.at - Katharina Stiassny">
+    <meta name="keywords" content="Katharina Stiassny, Burnout, Prophylaxe, Prävention, vorbeugen, gesund, leistungsfähig, Stay Healthy, Ausweg, Hilfe, Training, Trainer, Beratung, Entspannung, Entspannungstraining, Stress, Stressmanagement, Zeitmanagement, durchstarten">
+    <title>StayHealthy.at - Katharina Stiassny</title>
+  
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding-bottom: 3cm; /* Ensure space for contact section */
+        }
+        .navbar {
+            height: 4cm;
+            background-color: white;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow under the navbar */
+        }
+        .navbar img {
+            height: 80%;
+        }
+        .menu-btn {
+            font-size: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #333;
+        }
+        .menu-btn:focus {
+            outline: none;
+        }
+        .side-menu {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #d5463c;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 101;
+        }
+        .side-menu a {
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+        .side-menu a:hover {
+            background-color: #f16a60;
+        }
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            padding: 5cm 20px 20px 20px;
+        }
+        .main-content .text-section {
+            width: 65%; /* Make text section wider to give more space */
+            margin-right: 60px; /* Adds more space between text and images */
+        }
+        .main-content .text-section p {
+            margin-bottom: 20px;
+        }
+        .main-content .image-section {
+            width: 30%; /* Reduced to balance the layout */
+            display: flex;
+            flex-direction: column; /* Ensure the images stay centered vertically */
+            align-items: center; /* Center images horizontally */
+        }
+        .main-content .image-section img {
+            width: 200px;
+            height: 300px;
+            border-radius: 15px;
+            border: 2px solid #d5463c;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow to images */
+            margin-bottom: 20px; /* Space between images */
+            transition: transform 0.3s ease; /* Smooth hover effect */
+        }
+        .main-content .image-section img:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+        /* Quote styling */
+        .quote-section {
+            background-color: #d5463c;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-style: italic;
+            width: 100%; /* Ensure it fits the width of the text section */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the quote box */
+        }
+
+        /* Colourline styling */
+        #colourline {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            background: url('images/colorline.jpg') repeat-x; /* Repeat horizontally */
+            z-index: 98;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            height: 3cm;
+            background-color: white;
+            border-top: 1px solid #d5463c;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Shadow from the top */
+            position: fixed;
+            bottom: -3cm; /* Initially hidden off-screen */
+            left: 0;
+            right: 0;
+            z-index: 99;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: bottom 0.5s ease; /* Smooth slide-in transition */
+        }
+        .contact-section div {
+            margin: 0 10px;
+        }
+        .contact-section a {
+            color: #d5463c;
+            text-decoration: none;
+        }
+        .contact-section a:hover {
+            text-decoration: underline;
+        }
+        .contact-section p {
+            margin: 5px 0;
+        }
+        .contact-section .contact-item {
+            margin: 0 15px;
+        }
+        .logoul {
+    list-style-type: none;
+    font: normal 0.9em Arial, Helvetica, sans-serif;
+}
+li::before {
+    position: relative;
+    content: url(images/logo_li.jpg);
+    height: 28px;
+    width: 20px;
+    padding: 0px 5px 0px 0px;
+    top: 6px;
+}
+
+.input{
+    padding: 10px;
+    border-radius: 2px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    width: 250px;
+    border-color: #d5463c;
+    border-style:double;
+
+}
+.inputbig{
+    border-color: #d5463c;
+    border-style:double;
+height: 200;
+width:400px;
+padding: 10px;
+    border-radius: 2px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+
+}
+
+.note{
+    color: gray;
+text-shadow: #333;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+font-style: italic;
+font-size: 70%;
+}
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <img src="images/logo.png" alt="Logo">
+        <button class="menu-btn" onclick="toggleMenu()">Menü ☰</button>
+    </div>
+
+    <!-- Slide-in Side Menu -->
+    <div id="sideMenu" class="side-menu">
+        <a href="javascript:void(0)" onclick="toggleMenu()">Schließen &times;</a>
+        <a href="index.html">Menü</a>
+        <a href="neues.html">Neues</a>
+        <a href="burnout.html">Burnout</a>
+        <a href="entspannung.html">Entspannung</a>
+        <a href="erneahrung.html">Ernährung</a>
+        <a href="nordic-walking.html">Nordic Walking</a>
+        <a href="ueber-mich.html">Über mich</a>
+        <a href="kontakt.html">Kontakt</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Text Section with Quote -->
+        <div class="text-section">
+            <!-- Quote Section -->
+            
+            <p><b>Kontaktieren sie mich!</b></p>
+            <p>Anfragen per eMail oder Formular werden innerhalb von 24 Stunden von mir beantwortet.</p>
+            <p><i>Sie brauchen nicht zu Zögern.</i></p>
+
+            <ul class="logoul">
+                <li href="mailto:office@stayhealthy.at"><b>Email:</b> office@stayhealthy.at</li>
+                <li href="mailto:office@stayhealthy.at"><b>Telefon:</b> 06763400880</li>
+                <li href="mailto:office@stayhealthy.at"><b>Firmensitz:</b> Universumstraße 64/27, 1200 Wien</li>
+            
+            </ul>
+<br>
+<br>            <p><b>Kontaktformular:</b></p>
+
+<div class="Formular">
+    <form class = "row g-3" action="https://formsubmit.co/luap.palu@gmail.com" method="post">
+<input type="hidden" name="_subject" value="Neue Anfrage von StayHealthy!">
+<input type="hidden" name="_captcha" value="false">
+        <input class="input" type="text" placeholder="Ihren Namen hier eingeben." name="Name" required>
+<br>
+<input type="hidden" name="_next" value="danke.html">
+        <input class="input" type="email" placeholder="Ihre Email Adresse hier eingeben." name="Email" required>
+<br>
+<input class="input" type="number" placeholder="Ihre Telefonnummer hier eingeben." name = "Telefon" required>
+<br>
+
+<input class="inputbig" type="box" placeholder="Ihr Anliegen hier ausführlich erklären." name="Anliegen" required>
+<br>
+<input type="hidden" name="_template" value="box">
+<input type="hidden" name="_next" value="danke.html">
+<input class="input" type="submit">
+
+    </form>
+<a class="note">Das senden eines Formulares kann bis zu 3 Minuten dauern.
+    Bitte die Seite offen lassen.
+</a>
+
+
+</div>
+            
+        </div>
+
+        <!-- Image Section -->
+        <div class="image-section">
+            <img src="images/home1.jpg" alt="Image 1">
+            <img src="images/kontakt1.jpg" alt="Image 1">
+           
+        </div>
+    </div>
+
+    <!-- Colourline Image -->
+    <div id="colourline"></div>
+
+    <!-- Contact Section -->
+    <div class="contact-section" id="contactSection">
+        <div class="contact-item">
+            <p>Telefon: <a href="tel:+4367761670710">0677/61 67 0710
+            </a></p>
+        </div>
+        <div class="contact-item">
+            <p>Firmensitz: Universumstraße 64/27, 1200 Wien</p>
+        </div>
+        <div class="contact-item">
+            <p>Email: <a href="mailto:office@stayhealthy.at">office@stayhealthy.at</a></p>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            if (sideMenu.style.width === '0px' || sideMenu.style.width === '') {
+                sideMenu.style.width = '250px';
+            } else {
+                sideMenu.style.width = '0px';
+            }
+        }
+
+        // Show the contact section with smooth slide-in effect
+        window.addEventListener('scroll', function() {
+            const contactSection = document.getElementById('contactSection');
+            const scrollPosition = window.innerHeight + window.scrollY;
+            const pageHeight = document.body.offsetHeight;
+            
+            if (scrollPosition >= pageHeight - 10) {
+                contactSection.style.bottom = '0'; // Slide in
+            } else {
+                contactSection.style.bottom = '-3cm'; // Slide out
+            }
+        });
+    </script>
+
+</body>
+</html>
