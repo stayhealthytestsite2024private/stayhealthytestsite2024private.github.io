@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login zu StayHealthy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+	<link rel="stylesheet" href="login.css">
+
+</head>
+<body>
+<script type="module" src="firebaseauth.js"></script>
+	  <script src="login.js"></script>
+<br><br>
+    <h2>Willkommen bei StayHealthy.at</h2>
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form action="#">
+			<h1>Account erstellen</h1>
+
+			<span>Jetzt einen gratis Account erstellen.</span>
+			<form method="post" action="">
+				<div id="signUpMessage" class="messageDiv" style="display: none;"></div>
+				<input type="text" id="rname"placeholder="Vor und Nachname" autocomplete="new-username"/>
+				<input type="email" id="remail" placeholder="Email"autocomplete="new-username" />
+				<input type="password" id="rpassword" placeholder="Passwort" autocomplete="new-password" />
+				<input type="submit" value="Registrieren" id="submitSignUp">
+			</form>
+
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form action="#">
+			<h1>Anmelden</h1>
+
+			<form method="post" action="">
+				<div id="signInMessage" class="messageDiv" style="display: none;"></div>
+				<input id="email" type="email" placeholder="Email" />
+				<input id="password"type="password" placeholder="Passwort" />
+				<input type="submit" value="Anmelden"id="submitSignIn">
+			</form>
+
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Willkommen.</h1>
+				<p>Haben Sie schon einen Account? Hier anmelden.</p>
+				<button class="ghost" id="signIn">Anmelden</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Willkommen zurück.</h1>
+				<p>Sie haben noch keinen Account? Hier Registrieren!</p>
+				<button class="ghost" id="signUp">Registrieren</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+    const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+
+signUpButton.addEventListener('click', () => {
+	container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+	container.classList.remove("right-panel-active");
+});
+</script>
+</body>
+<footer class="footer">
+	<h6>© 2024 | StayHealthy.at | Vienna</h6>
+</footer>
+</html>

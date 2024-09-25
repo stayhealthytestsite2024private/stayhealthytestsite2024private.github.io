@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Die HealthyQueens!</title>
+  <link rel="favourites icon" src="healthyimages/logo.ico">
+
+  <style>
+    /* General Styling */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f4f4f4;
+    }
+
+    /* Topbar Styling */
+    .topbar {
+      width: 100%;
+      height: 2cm; /* 2cm topbar */
+      background-color: #6ed600;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .logo {
+      height: 1.5cm; /* Adjust the size of the logo */
+    }
+
+    .menu-btn-container {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .topbar button {
+      background-color: #428a03;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 5px;
+    }
+
+    .topbar button:hover {
+      background-color: #4ea501;
+    }
+
+    /* Side Menu Styling */
+    .side-menu {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      right: 0; /* Change to right side */
+      background-color: #333;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 2cm; /* Menu starts below the topbar */
+    }
+
+    .side-menu a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .side-menu a:hover {
+      color: #f1f1f1;
+    }
+
+    /* Close button now separate from other menu links */
+    .side-menu .close-btn {
+      padding: 16px;
+      background-color: #444;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      font-size: 25px;
+      display: block;
+    }
+
+    .side-menu .close-btn:hover {
+      background-color: #555;
+    }
+
+    /* Content Styling */
+    .content {
+      padding: 20px;
+      margin-top: 2cm;
+    }
+
+    .content h1 {
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .content p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    .button{
+    padding: 15px;
+    background-color: #6ed600;
+    border: #333;
+    border-color: #428a03;
+    border-style: solid;
+    border-radius: 10px;
+    display: flex;
+   justify-content: center;
+   justify-self: center;
+   align-items: center;
+   align-self: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="topbar">
+    <!-- Logo Image in the Center -->
+    <img src="healthyimages/logo.png" alt="Logo" class="logo">
+
+    <!-- Menu Button on the Right -->
+    <div class="menu-btn-container">
+      <button id="menuBtn">☰ Menü</button>
+    </div>
+  </div>
+
+  <!-- Side Menu -->
+  <div id="sideMenu" class="side-menu">
+    <!-- Close Button separated above the menu options -->
+    <a href="javascript:void(0)" class="close-btn" id="closeBtn">&times; Schließen</a>
+    
+    <a href="healthyqueens.html">Start</a>
+    <a href="#">Über uns</a>
+    <a href="#">Unser Angebot</a>
+    <a href="healthymitglied.html">Mitgliedschaft</a>
+  </div>
+
+  <!-- Welcome Section -->
+  <div class="content">
+    <h1>Werden Sie Mitglied!</h1>
+    <button id="member" class="button">Das All In 1 Healthy Queens Abo</button>
+  </div>
+
+  <script>
+    // Get elements
+    const menuBtn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const sideMenu = document.getElementById('sideMenu');
+
+    // Event listener to open the menu
+    menuBtn.addEventListener('click', () => {
+      sideMenu.style.width = '250px';
+    });
+
+    // Event listener to close the menu
+    closeBtn.addEventListener('click', () => {
+      sideMenu.style.width = '0';
+    });
+
+    document.getElementById('member').addEventListener('click', function(){
+      alert('Comming soon')
+    })
+  </script>
+</body>
+</html>
