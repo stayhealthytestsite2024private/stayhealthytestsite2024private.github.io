@@ -128,3 +128,13 @@ if(localStorage.getItem('loggedInUserId')){
   }
 }
 
+if(localStorage.getItem('error')){
+  var errorcode = localStorage.getItem('error');
+  if (errorcode === "003"){
+    alert('Die Sitzung wurde Notdürftig beendet. Begründung: Verdacht auf eine Hackerattacke.');
+    localStorage.removeItem('error');
+  }else{
+    alert('Unbekannter Fehler.');
+    localStorage.removeItem('error');
+  }
+}
