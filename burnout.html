@@ -88,15 +88,7 @@
             flex-direction: column; /* Ensure the images stay centered vertically */
             align-items: center; /* Center images horizontally */
         }
-        .main-content .image-section img {
-            width: 200px;
-            height: 300px;
-            border-radius: 15px;
-            border: 2px solid #d5463c;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow to images */
-            margin-bottom: 20px; /* Space between images */
-            transition: transform 0.3s ease; /* Smooth hover effect */
-        }
+
         .main-content .image-section img:hover {
             transform: scale(1.05); /* Slight zoom effect on hover */
         }
@@ -159,6 +151,24 @@
         }
         .contact-section .contact-item {
             margin: 0 15px;
+        }
+        .pfeil{
+            width: 120px;
+            height: 150px;
+            border-radius: 15px;
+            border: none;
+            
+            margin-bottom: 20px; /* Space between images */
+            transition: transform 0.3s ease; /* Smooth hover effect */
+        }
+        .image {
+            width: 200px;
+            height: 300px;
+            border-radius: 15px;
+            border: 2px solid #d5463c;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow to images */
+            margin-bottom: 20px; /* Space between images */
+            transition: transform 0.3s ease; /* Smooth hover effect */
         }
 
 .logoul {
@@ -233,8 +243,9 @@ li::before {
 
         <!-- Image Section -->
         <div class="image-section">
-            <img src="images/burnout1.jpg" alt="Image 1">
-            <img src="images/burnout2.jpg" alt="Image 2">
+            <img class="image"src="images/burnout1.jpg" alt="Image 1">
+            <img class="pfeil" src="images/pfeil.png" alt="Pfeil">
+            <img class="image"src="images/burnout2.jpg" alt="Image 2">
         </div>
     </div>
 
