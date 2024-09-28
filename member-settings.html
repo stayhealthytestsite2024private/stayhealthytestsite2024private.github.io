@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitgliederbereich - StayHealthy.at</title>
+    <link rel="favourites icon" href="images/favicon.ico">
+    <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut, deleteUser} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+import {getFirestore, getDoc, doc, deleteDoc} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyC-aLANF3Waui3Df0mpOK55XqhuKGZu_Dc",
+    authDomain: "stayhealthyuserdatabase.firebaseapp.com",
+    projectId: "stayhealthyuserdatabase",
+    storageBucket: "stayhealthyuserdatabase.appspot.com",
+    messagingSenderId: "660807547495",
+    appId: "1:660807547495:web:f92cdd3b8e9e0d9160f2c2",
+    measurementId: "G-7KS7Z5X9HT"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  
+  
+
+  const auth=getAuth();
+  const db=getFirestore();
+
+  onAuthStateChanged(auth, (user)=>{
+    const loggedInUserId=localStorage.getItem('loggedInUserId');
+    if (loggedInUserId){
+        const docRef = doc(db, "users", loggedInUserId);
+        getDoc(docRef)
+        .then((docSnap)=>{
+            if(docSnap.exists()){
+                const userData=docSnap.data();
+                document.getElementById('loggedUserName').innerText=userData.name;
+                document.getElementById('loggedUserEmail').innerText=userData.email;
+            }
+            else{
+                localStorage.removeItem('loggedInUserId');
+                signOut(auth)
+                .then(()=>{
+                    window.location.href='accountredirectmanager.html'
+                })
+                .catch((error)=>{
+                    console.error('Error signing out:', error)
+                })
+                window.location.href="accountredirectmanager.html"
+                console.log("no document matching found id")
+            }
+        })
+        .catch((error)=>{
+            localStorage.removeItem('loggedInUserId');
+            signOut(auth)
+            .then(()=>{
+                window.location.href='accountredirectmanager.html'
+            })
+            .catch((error)=>{
+                console.error('Error signing out:', error)
+            })
+            window.location.href="accountredirectmanager.html"
+            console.log("Error getting document")
+        })
+    }
+    else{
+        localStorage.removeItem('loggedInUserId');
+        signOut(auth)
+        .then(()=>{
+            window.location.href='accountredirectmanager.html'
+        })
+        .catch((error)=>{
+            console.error('Error signing out:', error)
+        })
+        window.location.href="accountredirectmanager.html"
+        console.log("UserId not found in local storage")
+    }
+  })
+
+    </script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Card Container */
+        .settings-card {
+            background-color: white;
+            width: 400px;
+            padding: 30px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            position: relative;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+
+        /* Title */
+        .settings-card h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* User stats section */
+        .user-stats {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .user-stats h3 {
+            font-size: 20px;
+            color: #34495e;
+        }
+
+        .user-stats .username {
+            font-size: 18px;
+            color: #3498db;
+        }
+
+        .user-stats small {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        /* Delete account button */
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .settings-card {
+                width: 90%;
+            }
+        }
+
+        .btn{
+            background-color: #06b200;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px; 
+        }
+
+        .btn:hover{
+            background-color: #069301;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Account Settings Card -->
+    <div class="settings-card">
+        <!-- Close button -->
+        <button class="close-btn" id="closeBtn">&times;</button>
+        
+        <!-- Title -->
+        <h2>Einstellungen</h2>
+
+        <!-- User stats section -->
+        <div class="user-stats">
+            <h3>Account Daten</h3>
+            <div class="username"><span id="loggedUserName">User Name</span></div>
+            <small id="loggedUserEmail">user@example.com</small>
+        </div>
+
+        <!-- Delete Account button -->
+        <button class="btn"id="toggleEmail">Email Adresse immer anzeigen: Aus</button>
+        <button class="btn"id="toggleInstaLoad">Schnelles Laden: An</button>
+        <button class="delete-btn" id="resetData">Lokale Daten zurücksetzen</button>
+        <button class="delete-btn" onclick="alert('Um einen Account zu löschen, schreiben Sie uns bitte ihren Account Namen. Unsere Email: office@stayhealthy.at');"id="deleteAccount">Account löschen</button>
+    </div>
+
+    <script>
+
+        // Close button logic
+        document.getElementById('closeBtn').addEventListener('click', function () {
+            // Redirect or close action
+            window.location.href = 'member.html'; // Redirect back to the homepage or another page
+        });
+
+
+document.getElementById('resetData').addEventListener('click', function()
+    {
+        let result1 = confirm("Diese Aktion wird Sie abmelden, und alle Einstellungen des Accounts zurücksetzen!");
+      
+      if (result1) {
+localStorage.clear();
+window.location.href='member.html'
+      } else {
+        alert("Abgebrochen.");
+      }
+
+})
+
+
+document.getElementById('toggleEmail').addEventListener('click', function(){
+    if (localStorage.getItem('emailvis')){
+localStorage.removeItem('emailvis')
+document.getElementById('toggleEmail').innerText="Email Adresse immer anzeigen: Aus";
+
+    }else{
+        localStorage.setItem('emailvis', true);
+        document.getElementById('toggleEmail').innerText="Email Adresse immer anzeigen: An";
+    }
+
+})
+
+
+if (localStorage.getItem('emailvis')){
+    document.getElementById('toggleEmail').innerText="Email Adresse immer anzeigen: An"
+}
+
+document.getElementById('deleteAccount').addEventListener('click', function(){
+    alert('Um einen Account zu löschen, schreiben Sie uns bitte ihren Account Namen. Unsere Email: office@stayhealthy.at');
+})
+
+
+document.getElementById('toggleInstaLoad').addEventListener('click', function(){
+    if (localStorage.getItem('instaLoad')){
+localStorage.removeItem('instaLoad')
+document.getElementById('toggleInstaLoad').innerText="Schnelles Laden: An";
+
+    }else{
+        localStorage.setItem('instaLoad', true);
+        document.getElementById('toggleInstaLoad').innerText="Schnelles Laden: Aus";
+    }
+
+})
+
+if (localStorage.getItem('instaLoad')){
+    document.getElementById('toggleInstaLoad').innerText="Schnelles Laden: Aus"
+}
+
+    </script>
+
+</body>
+</html>
