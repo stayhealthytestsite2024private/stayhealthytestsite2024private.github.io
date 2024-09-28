@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 import {getFirestore, getDoc, doc} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
 localStorage.removeItem('finishedLoading');
@@ -23,10 +23,49 @@ const firebaseConfig = {
 
   onAuthStateChanged(auth, (user)=>{
     const loggedInUserId=localStorage.getItem('loggedInUserId');
+    const uid = user.uid;
 
- 
 
     if (loggedInUserId){
+        console.log('UserId found in the local storage. Connectiong to server.');
+
+        if (localStorage.getItem('loggedInUserId')===uid){
+            
+        }else{
+            console.log('Strange ID');
+            setTimeout(() => {
+                console.log('HACKER ATTACK! EMERGENCY');
+                setTimeout(() => {
+                    console.log('Emergency ending session.');
+                    setTimeout(() => {
+                        console.log('Connecting to Server...');
+                        setTimeout(() => {
+                            console.log('Ending session...');
+                            setTimeout(() => {
+                                console.log('Clearing user data...');
+                                setTimeout(() => {
+                                    
+                                    localStorage.setItem('error', '003');
+                                    localStorage.removeItem('loggedInUserId');
+                            
+                            auth.signOut();
+                            setTimeout(() => {
+                        console.log('Session blocked.');
+                        setTimeout(() => {
+                            console.log('Redirecting...');
+                            setTimeout(() => {
+                                window.location.href = 'accountredirectmanager.html';
+                                        }, 50);
+                                    }, 50);
+                                }, 50);
+                                    }, 50);
+                                }, 50);
+                            }, 50);
+                        }, 50);
+
+                    }, 100);
+            },100);
+        }
         
         const docRef = doc(db, "users", loggedInUserId);
         getDoc(docRef)
@@ -108,7 +147,6 @@ const firebaseConfig = {
         })
     }
     else{
-        localStorage.removeItem('loggedInUserId');
         signOut(auth)
         .then(()=>{
             window.location.href='accountredirectmanager.html'
@@ -223,7 +261,4 @@ auth.signOut();
 window.location.href = 'member.html';
     }, 5000);
 }
-
-
-
 
