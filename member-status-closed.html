@@ -1,0 +1,47 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mitgliederbereich - StayHealthy.at</title>
+        <link rel="favourites icon" href="images/favicon.ico">
+        <link rel="stylesheet" href="member.css">
+        <link rel="stylesheet" href="popup.css">
+        <script src="status-check.js" type="module"></script>
+    </head>
+    <body>
+        <div class="top-bar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo">
+            </div>
+            <div class="profile">
+                <img id="profileImage" src="images/user-profile.png" alt="Profile">
+                <!-- Popup menu -->
+                <div id="popupMenu" class="popup-menu">
+                    <button id="logout">Abmelden</button>
+                    <button id="accountSettingsButton">Einstellungen</button>
+                    <button id="closePopupButton" class="close-popup">Schliessen</button>
+                    <button class="admin-button" id="adminButton">Admin Panel</button>
+                </div>
+            </div>
+        </div>
+        <div class="welcome-section">
+            <div class="errormessage"><span id="errormessage2">Wir haben Probleme mit unseren Servern. Unser Team weiß bereit bescheit!</span></div>
+            <div style="display:none"class="username"><span id="loggedUserName">Lädt..</span></div>
+            <small style="display:none"class="content" id="loggedUserEmail">N/A</small>
+        </div>
+    
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent">
+            <br><br><br><br><br><hr>
+            <h2 id="vip-specific-title">Fehler beim Laden ihres Abonnents.</h2>
+            <div class="promtpurchase">
+                <p>Kaufen Sie StayHealthy Basic oder Plus für einen Allzeit niedrigen Preis!</p>
+                <button class="purchase" onclick="window.dialog.showModal();" id="promtpurchase">Jetzt kaufen</button>
+            </div>
+
+    </body>
+    </html>
+       
+</body>
+</html>

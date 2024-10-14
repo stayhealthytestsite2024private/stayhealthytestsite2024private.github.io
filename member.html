@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitgliederbereich - StayHealthy.at</title>
+    <link rel="favourites icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="member.css">
+    <link rel="stylesheet" href="popup.css">
+    <script src="status-check.js" type="module"></script>
+    
+    <script>
+window.addEventListener("load", function() {
+    const manager = document.createElement("script");
+    manager.src = "member.js";
+    manager.type = "module";
+    
+    // Error handling
+    manager.onerror = function() {
+        console.error("Error loading member.js");
+    };
+    
+    document.body.appendChild(manager);
+
+    const manager1 = document.createElement("script");
+    manager1.src = "countdown.js";
+    
+    
+    // Error handling
+    manager1.onerror = function() {
+        console.error("Error loading countdown.js");
+    };
+    
+    document.body.appendChild(manager1);
+});
+
+       </script>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <div class="profile">
+            <img id="profileImage" src="images/user-profile.png" alt="Profile">
+            <!-- Popup menu -->
+            <div id="popupMenu" class="popup-menu">
+                <button id="logout">Abmelden</button>
+                <button id="accountSettingsButton">Einstellungen</button>
+                <button id="closePopupButton" class="close-popup">Schliessen</button>
+                <button class="admin-button" id="adminButton">Admin Panel</button>
+            </div>
+        </div>
+    </div>
+    <div class="welcome-section">
+        <h1 id ="welcome"class="content">Willkommen zurück,</h1>
+        <div class="username"><span id="loggedUserName">Lädt..</span></div>
+        <small class="content" id="loggedUserEmail">N/A</small>
+    </div>
+    <div class="loading-container" id="loadingContainer">
+        <div class="loading-text" id="loadingText">Lädt...</div>
+        <div class="loading-circle" id="loadingCircle"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <br><br><br><br><br><hr>
+        <h2 id="vip-specific-title">Fehler beim Laden ihres Abonnents.</h2>
+        <div class="promtpurchase">
+            <p>Kaufen Sie StayHealthy Basic oder Plus für einen Allzeit niedrigen Preis!</p>
+            <button class="purchase" onclick="window.dialog.showModal();" id="promtpurchase">Jetzt kaufen</button>
+        </div>
+        <div id="article"class="article">
+            <h2 class="text">Basic Abo</h2>
+            <br>
+            <img class="image"src="blog-images/herbst.jpg">
+            <br>
+            <p style="font-size:20px" class="text">Herbenenergie bezieht sich auf die Nutzung von pflanzlichen Ressourcen zur Energiegewinnung und Heilung. Diese uralte Praxis wird weltweit geschätzt und bietet zahlreiche Vorteile:
+<br><br>
+                Nachhaltig: Pflanzen sind eine erneuerbare Energiequelle, die unsere Umwelt schützt.
+                Gesundheitlich fördernd: Viele Kräuter haben heilende Eigenschaften, die Körper und Geist stärken.</p>
+        </div>
+
+
+        <div id="article"class="articlePlus">
+            <img class="crown"src="images/crown.png">
+            <h2 class="text">Premium Abo</h2>
+
+            <br>
+            <img class="image"src="blog-images/herbst.jpg"><br><p class="countdown" id="countdown-premium-test">Ups, der Countdown konnte nicht starten.</p>
+            <br>
+            <p style="font-size:20px" class="text">Herbenenergie bezieht sich auf die Nutzung von pflanzlichen Ressourcen zur Energiegewinnung und Heilung. Diese uralte Praxis wird weltweit geschätzt und bietet zahlreiche Vorteile:
+<br><br>
+                Nachhaltig: Pflanzen sind eine erneuerbare Energiequelle, die unsere Umwelt schützt.
+                Gesundheitlich fördernd: Viele Kräuter haben heilende Eigenschaften, die Körper und Geist stärken.
+                Vielseitig: Herbenenergie kann in Form von Tees, Ölen oder Nahrungsergänzungsmitteln genutzt werden.
+                Kulturübergreifend: Traditionelle Heilmethoden aus verschiedenen Kulturen setzen auf Kräuter zur Verbesserung des Wohlbefindens.
+                Durch die Rückbesinnung auf Herbenenergie können wir auf natürliche Weise unsere Gesundheit fördern und gleichzeitig umweltbewusst handeln.</p>
+        </div>
+
+        <div id="article"class="permArcticle weih24">
+            <img class="baum"src="blog-images/weihnachtsbaum2.png">
+            <h2 class="text-weih">Weihnachten 2024</h2>
+
+            <br>
+            <img class="image"src="blog-images/winter.jpg"><br><p class="countdown-weih" id="countdown-weih24">Ups, der Countdown konnte nicht starten.</p>
+            <br>
+            <p style="font-size:20px" class="text-weih">Weihnachten ist ein Fest der Freude und des Beisammenseins, das jedes Jahr am 25. Dezember gefeiert wird. In vielen Familien wird der Weihnachtsbaum liebevoll geschmückt, unter dem Geschenke für die Liebsten liegen. Traditionelle Weihnachtslieder und Kerzenlicht sorgen für eine besinnliche Atmosphäre. Besonders für Kinder ist die Vorfreude auf den Weihnachtsmann oder das Christkind ein Höhepunkt der Festtage. Für viele Menschen ist Weihnachten auch eine Zeit der Besinnung, des Friedens und der Dankbarkeit.</p>
+        </div>
+        <div id="article"class="permArcticle weih25">
+            <img class="baum"src="blog-images/weihnachtsbaum2.png">
+            <h2 class="text-weih">Weihnachten 2025</h2>
+
+            <br>
+            <img class="image"src="blog-images/winter.jpg"><br><p class="countdown-weih" id="countdown-weih25">Ups, der Countdown konnte nicht starten.</p>
+            <br>
+            <p style="font-size:20px" class="text-weih">Weihnachten ist ein Fest der Freude und des Beisammenseins, das jedes Jahr am 25. Dezember gefeiert wird. In vielen Familien wird der Weihnachtsbaum liebevoll geschmückt, unter dem Geschenke für die Liebsten liegen. Traditionelle Weihnachtslieder und Kerzenlicht sorgen für eine besinnliche Atmosphäre. Besonders für Kinder ist die Vorfreude auf den Weihnachtsmann oder das Christkind ein Höhepunkt der Festtage. Für viele Menschen ist Weihnachten auch eine Zeit der Besinnung, des Friedens und der Dankbarkeit.</p>
+        </div>
+    
+    
+    
+        <div id="articlePreview"class="articlePreview">
+            <h2 class="text">Sie HACKER!</h2>
+            <br>
+            <img class="image"src="blog-images/herbst.jpg">
+            <br>
+            <p style="font-size:20px" class="text">
+<br><br>
+            Tja, so leicht sind wir nicht reinzulegen. Diese Webseite ist gegen Hackerattacken abgesichert. Dies, war nur Testcontent, der dazu dient, eine nicht manipulierbare Vorschau auf den echten Seiteninhalt zu geben. Wenn sie dies lesen, sind sie ein Hacker, oder die Seite konnte nicht richtig laden.</p>
+        </div>
+        <div id="articlePreview" class="articlePreview">
+            <h2 class="text">Sie HACKER!</h2>
+            <br>
+            <img class="image"src="blog-images/winter.jpg">
+            <img class="image"src="blog-images/sommer.jpg">
+            <br>
+            <p style="font-size:20px" class="text">
+<br><br>
+            Tja, so leicht sind wir nicht reinzulegen. Diese Webseite ist gegen Hackerattacken abgesichert. Dies, war nur Testcontent, der dazu dient, eine nicht manipulierbare Vorschau auf den echten Seiteninhalt zu geben. Wenn sie dies lesen, sind sie ein Hacker, oder die Seite konnte nicht richtig laden.</p>
+            </div>
+      
+
+            <dialog id="dialog">
+                <h2>Vielen Dank!</h2>
+                <p>Bitte beantragen Sie Ihren Kauf bei: <a href="mailto:office@stayhealthy.at">office@stayhealthy.at</a>!</p>
+                <p>Ich freue mich auf Sie!</p>
+                <button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+            </dialog>
+    
+    
+    
+    
+    </div>
+       </div>
+
+
+
+
+
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel fade-in">
+        <h2>Admin Panel</h2>
+        <p>Admin Panel leer.</p>
+    </div>
+
+ 
+
+    <script>
+        // Profile button logic
+        const profileImage = document.getElementById('profileImage');
+        const popupMenu = document.getElementById('popupMenu');
+        const accountSettingsButton = document.getElementById('accountSettingsButton');
+        const closePopupButton = document.getElementById('closePopupButton');
+        const adminButton = document.getElementById('adminButton');
+        const adminPanel = document.querySelector('.admin-panel');
+        const loggedUserEmail = document.getElementById('loggedUserEmail');
+        const logoutButton = document.getElementById('logout');
+        const loadingCircle = document.getElementById('loadingCircle');
+        const loadingText = document.getElementById('loadingText');
+        const mainContent = document.getElementById('mainContent');
+        const welcomeSection = document.querySelector('.welcome-section');
+        const loadingContainer = document.getElementById('loadingContainer');
+
+        // Handle profile image click to toggle popup menu
+        profileImage.addEventListener('click', function () {
+            popupMenu.style.display = popupMenu.style.display === 'block' ? 'none' : 'block';
+            const validEmails = ['katharina_stiassny@hotmail.com', 'paul@stiassny.at'];
+            adminButton.style.display = popupMenu.style.display === 'block' && validEmails.includes(loggedUserEmail.textContent) ? 'block' : 'none';
+        });
+
+        // Account settings button logic
+
+
+        // Close popup button logic
+        closePopupButton.addEventListener('click', function () {
+            popupMenu.style.display = 'none';
+        });
+
+        // Admin panel toggle logic
+        adminButton.addEventListener('click', function () {
+            adminPanel.classList.toggle('active');
+        });
+
+        // Check user email after 0.5 seconds to display admin button if necessary
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                const validEmails = ['katharina_stiassny@hotmail.com', 'paul@stiassny.at'];
+                if (validEmails.includes(loggedUserEmail.textContent)) {
+                   
+                    profileImage.addEventListener('click', function () {
+                        if (popupMenu.style.display === 'block') {
+                            adminButton.style.display = 'block';
+                        } else {
+                            adminButton.style.display = 'none';
+                        }
+                    });
+                }
+            }, 500);
+        });
+
+
+        if (localStorage.getItem('instaLoad')){
+            var duration = 1000
+        }else{
+            var duration = 400
+        }
+
+        // Animation logic for welcome section to main content
+        setTimeout(() => {
+            loadingContainer.style.display = 'block'; // Show loading container
+            setTimeout(() => {
+                if (localStorage.getItem('error')){
+                }else{
+                    loadingContainer.style.display = 'none'; // Hide loading container
+                mainContent.style.display = 'block'; // Show main content
+                mainContent.style.opacity = '1';
+                mainContent.style.transform = 'translateY(0)';
+                welcomeSection.style.opacity = '1'; // Make welcome section visible
+                localStorage.setItem('finishedLoading',1);
+                }
+            }, duration); // Duration for loading
+        }, duration); // Initial delay before starting the loading animation
+
+        if (localStorage.getItem('emailvis')){
+    document.getElementById('loggedUserEmail').style.opacity=1
+
+  }else{
+    document.getElementById('loggedUserEmail').style.opacity=0 
+  }
+
+
+  var currentdate = new Date(); 
+var datetime = currentdate.getHours()
+    if (datetime >= '0' && datetime <= '5'){
+document.getElementById('welcome').innerText = "Gute Nacht,"
+    }
+    if (datetime >= '6' && datetime <= '8'){
+document.getElementById('welcome').innerText = "Guten Morgen,"
+    }
+    if (datetime >= '9' && datetime <= '11'){
+document.getElementById('welcome').innerText = "Guten Vormittag,"
+    }
+    if (datetime >= '12' && datetime <= '16'){
+document.getElementById('welcome').innerText = "Guten Nachmittag,"
+    }
+    if (datetime >= '17' && datetime <= '19'){
+document.getElementById('welcome').innerText = "Guten Abend,"
+    }
+    if (datetime >= '20' && datetime <= '23'){
+document.getElementById('welcome').innerText = "Gute Nacht,"
+    }
+    </script>
+
+</body>
+</html>
