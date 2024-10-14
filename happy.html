@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="StayHealthy.at - Katharina Stiassny">
+    <meta name="keywords" content="Katharina Stiassny, Burnout, Prophylaxe, Prävention, vorbeugen, gesund, leistungsfähig, Stay Healthy, Ausweg, Hilfe, Training, Trainer, Beratung, Entspannung, Entspannungstraining, Stress, Stressmanagement, Zeitmanagement, durchstarten">
+    <title>StayHealthy.at - Heiligabend</title>
+    <link rel="favourites icon" href="images/favicon.ico">
+
+    <!-- Link to Google Fonts for nicer text -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Body styling and background image */
+        body {
+            background: url('https://c.pxhere.com/images/3c/89/16de80be47a9a90355a993b6bf75-1426077.jpg!d') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Heading styling */
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Countdown block styling */
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            display: none; /* Hide countdown until user starts */
+        }
+
+        .time {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Message styling */
+        #message {
+            margin-top: 20px;
+            font-size: 2rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Style for the Start button */
+        #start-btn {
+            padding: 10px 20px;
+            background-color: #ff0000;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s ease;
+        }
+
+        #start-btn:hover {
+            background-color: #e60000;
+        }
+
+        /* Snowflake style */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            font-size: 1.5rem;
+            color: white;
+            opacity: 0.8;
+            animation: fall linear infinite, sway 5s ease-in-out infinite;
+        }
+
+        @keyframes fall {
+            0% { top: -10px; }
+            100% { top: 100vh; } /* Full page height for smooth falling */
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+        }
+
+        /* Styling when it's Christmas */
+        body.christmas {
+            background: url('https://c.pxhere.com/images/3c/89/16de80be47a9a90355a993b6bf75-1426077.jpg!d') no-repeat center center fixed;
+            background-size: cover;
+        
+        }
+
+        body.christmas h1 {
+            color: #a6e603;
+        }
+
+        body.christmas #message {
+            color: rgb(230, 207, 0);
+        }
+
+        body.christmas #countdown {
+            display: none;
+        }
+        body.christmas #countdown {
+            display: none;
+        }
+
+        #no-button{
+            padding: 10px 20px;
+            background-color: #ff0000;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s ease;        
+        }
+        #no-button:hover{
+            background-color: #e60000;     
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="title">Dürfen wir eine Überraschung anzeigen?</h1>
+        <div id="countdown">
+            <div class="time">
+                <span id="days"></span> Tage
+            </div>
+            <div class="time">
+                <span id="hours"></span> Stunden
+            </div>
+            <div class="time">
+                <span id="minutes"></span> Minuten
+            </div>
+            <div class="time">
+                <span id="seconds"></span> Sekunden
+            </div>
+        </div>
+        <div id="message"></div>
+        <button id="start-btn">Na klar!</button>
+        <button id="no-button"onclick="window.location.href='kalender.html'">Zurück</button>
+    </div>
+    
+    <!-- Background Music -->
+    <audio id="bg-music" preload="auto" loop>
+        <source id="audio-source" src="beforechrist.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <!-- Snowflakes -->
+    <script>
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerText = '❄';
+            snowflake.style.left = Math.random() * window.innerWidth + 'px';
+            snowflake.style.animationDuration = Math.random() * 3 + 7 + 's'; // Random fall duration
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px'; // Random size for each snowflake
+            snowflake.style.animationDelay = Math.random() * 5 + 's'; // Random delay before falling
+            document.body.appendChild(snowflake);
+
+            // Remove snowflake after falling
+            setTimeout(() => {
+                snowflake.remove();
+            }, 10000); // Remove after 10 seconds
+        }
+
+        setInterval(createSnowflake, 200); // Create snowflakes every 200ms
+    </script>
+
+    <script>
+            async function loadMotivation() {
+      try {
+        // Lade die Datei motivation.txt
+        const response = await fetch('motivation.txt');
+        const text = await response.text();
+
+        // Teile den Text in Zeilen auf
+        const lines = text.split('\n').filter(line => line.trim() !== "");
+
+        // Heutiges Datum ermitteln
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth() + 1; // Monat ist nullbasiert, also +1
+        const year = today.getFullYear();
+
+        // Generiere eine "zufällige" Zahl basierend auf dem Datum
+        const seed = day + month + year;
+        const randomIndex = seed % lines.length;
+
+        // Wähle die Zeile basierend auf der generierten Zahl
+        const motivationText = lines[randomIndex];
+
+        // Zeige die Nachricht im div mit der id "message" an
+        document.getElementById('message').innerText = `StayHealthy's heutige Motivation: ${motivationText}`;
+      } catch (error) {
+        console.error('Fehler beim Laden der Motivation:', error);
+        document.getElementById('message').innerText = 'Fehler beim Laden der Motivation.';
+      }
+    }
+        const startButton = document.getElementById('start-btn');
+        const countdownElement = document.getElementById('countdown');
+        const messageElement = document.getElementById('message');
+        const bgMusic = document.getElementById('bg-music');
+        const audioSource = document.getElementById('audio-source');
+
+        // Set the date for Christmas Eve (24th December) and Christmas Day (25th December)
+        const christmasEve = new Date(new Date().getFullYear(), 11, 24, 0, 0, 0).getTime();
+        const christmasDay = new Date(new Date().getFullYear(), 11, 25, 0, 0, 0).getTime();
+
+        // Function to start the countdown and music
+        function startCountdown() {
+            // Play background music when the user clicks "Start"
+            bgMusic.play().then(() => {
+                countdownElement.style.display = "flex"; // Show the countdown
+                startButton.style.display = "none"; // Hide the start button
+
+                // Update the countdown every second
+                const countdownInterval = setInterval(() => {
+                    const now = new Date().getTime();
+                    const distance = christmasEve - now;
+
+                    // Time calculations for days, hours, minutes, and seconds
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    // Display the countdown
+                    document.getElementById("days").innerText = days;
+                    document.getElementById("hours").innerText = hours;
+                    document.getElementById("minutes").innerText = minutes;
+                    document.getElementById("seconds").innerText = seconds;
+                    document.getElementById('title').innerText="Grober Fehler!"
+                    
+
+                    // If it's Christmas Eve or Christmas Day, hide the countdown and show the message
+                    if (now >= christmasEve && now <= christmasDay + 86400000) {
+                        clearInterval(countdownInterval);
+                        countdownElement.style.display = "none";
+                        document.body.classList.add("christmas");
+
+                        // Show Christmas message
+                        messageElement.innerText = "Alles Gute! 🎄🎅🎁";
+                        document.getElementById('title').innerText="Heute ist Weihnachten!"
+                        
+                        // Change background music to the Christmas song (christ.mp3)
+                        audioSource.src = "christ.mp3"; // Switch to the Christmas day MP3
+                        bgMusic.load(); // Reload the audio element with the new source
+                        bgMusic.play();
+                    }else{
+                        loadMotivation();
+                    }
+                }, 1000);
+            }).catch(error => {
+                // Handle case where audio play fails (browser blocked it)
+                console.error("Audio play was blocked: ", error);
+                messageElement.innerText = "Please enable audio to enjoy the full experience.";
+            });
+        }
+
+        // Event listener for the start button
+        startButton.addEventListener('click', startCountdown);
+    </script>
+</body>
+</html>

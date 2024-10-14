@@ -1,0 +1,59 @@
+body {
+    background: url('https://images.unsplash.com/photo-1543779160-20e6ee3bc32d') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.time {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 2rem;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 2rem;
+}
+
+#countdown.finished {
+    display: none;
+}
+
+body.christmas {
+    background: url('https://images.unsplash.com/photo-1514377006585-6e7975371bd6?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+    background-size: cover;
+}
+
+body.christmas h1 {
+    color: #ff0000;
+}
+
+body.christmas #message {
+    color: gold;
+}
+
+body.christmas #countdown {
+    display: none;
+}
+

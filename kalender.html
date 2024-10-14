@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="StayHealthy.at - Katharina Stiassny">
+    <meta name="keywords" content="Katharina Stiassny, Burnout, Prophylaxe, Prävention, vorbeugen, gesund, leistungsfähig, Stay Healthy, Ausweg, Hilfe, Training, Trainer, Beratung, Entspannung, Entspannungstraining, Stress, Stressmanagement, Zeitmanagement, durchstarten">
+    <title>StayHealthy.at - Weihnachtskalender</title>
+    <link rel="favourites icon" href="images/favicon.ico">
+    <script type="module" src="secure.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1514070573861-9f59447abf84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3Mzd8MHwxfGFsbHwxfHx8fHx8fHwxNjQyNTEyMzEx&ixlib=rb-1.2.1&q=80&w=1080') no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(6, 100px);
+            grid-gap: 10px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 5px solid #FF5722;
+            animation: fadeIn 1s ease;
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .door {
+            width: 100px;
+            height: 100px;
+            background-color: #4CAF50;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .door.locked {
+            background-color: #555;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .door.open {
+            background-color: #FF5722;
+            cursor: default;
+        }
+        .door:hover:not(.open):not(.locked) {
+            transform: scale(1.1) rotate(3deg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 2px solid #333;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+            border-radius: 10px;
+            animation: popupOpen 0.4s ease;
+        }
+        .popup p {
+            margin-bottom: 20px;
+        }
+        .popup button {
+            padding: 10px 20px;
+            background-color: #FF5722;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .popup button:hover {
+            background-color: #E64A19;
+        }
+        @keyframes popupOpen {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calendar" id="calendar">
+    <!-- Türen des Kalenders werden durch JS generiert -->
+</div>
+
+<div class="popup" id="popup">
+    <p id="popup-text"></p>
+    <button onclick="closePopup()">Schließen</button>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<script>
+// Adventskalender-Logik
+const maxDays = 24;
+const calendar = document.getElementById('calendar');
+const popup = document.getElementById('popup');
+const popupText = document.getElementById('popup-text');
+const overlay = document.getElementById('overlay');
+
+// Beispieltexte aus einer "Weih.txt" Datei
+const weihTexte = [
+    "1. Dezember: Der erste Schnee fällt.",
+    "2. Dezember: Es riecht nach Zimt und Plätzchen.",
+    "3. Dezember: Die Vorfreude steigt.",
+    "4. Dezember: Wir backen Plätzchen.",
+    "5. Dezember: Die Lichter leuchten überall.",
+    "6. Dezember: Der Nikolaus war da.",
+    "7. Dezember: Wir zünden die zweite Kerze an.",
+    "8. Dezember: Der Baum wird geschmückt.",
+    "9. Dezember: Wir trinken heißen Kakao.",
+    "10. Dezember: Es wird kalt und gemütlich.",
+    "11. Dezember: Weihnachtsmusik ertönt überall.",
+    "12. Dezember: Die ersten Geschenke werden verpackt.",
+    "13. Dezember: Wir schreiben Weihnachtskarten.",
+    "14. Dezember: Die Weihnachtsmärkte sind eröffnet.",
+    "15. Dezember: Der Schnee glitzert im Mondlicht.",
+    "16. Dezember: Wir machen einen Spaziergang im Winterwald.",
+    "17. Dezember: Die Stadt ist festlich geschmückt.",
+    "18. Dezember: Der Duft von Glühwein liegt in der Luft.",
+    "19. Dezember: Wir sehen uns einen Weihnachtsfilm an.",
+    "20. Dezember: Bald ist Heiligabend.",
+    "21. Dezember: Der Winter beginnt offiziell.",
+    "22. Dezember: Es wird Geschenke eingepackt.",
+    "23. Dezember: Fast alles ist vorbereitet.",
+    "24. Dezember: Frohe Weihnachten!"
+];
+
+// Heute ist der Tag des Monats (entsperre nur bis zum heutigen Tag)
+const today = new Date().getDate();
+
+// Adventskalender erstellen
+for (let day = 1; day <= maxDays; day++) {
+    const door = document.createElement('div');
+    door.classList.add('door');
+    door.innerText = day;
+
+    if (day > today) {
+        door.classList.add('locked');
+    }
+
+    // Überprüfen, ob die Tür bereits geöffnet ist
+    if (isDoorOpen(day)) {
+        door.classList.add('open');
+    }
+
+    door.addEventListener('click', () => openDoor(day, door));
+    calendar.appendChild(door);
+}
+
+// Überprüft, ob die Tür bereits geöffnet ist (aus dem LocalStorage)
+function isDoorOpen(day) {
+    return localStorage.getItem(`door-${day}`) === 'open';
+}
+
+// Öffnet die Tür, zeigt den Popup und speichert den Status im LocalStorage
+function openDoor(day, door) {
+    // Überprüfen, ob die Tür nicht gesperrt oder bereits geöffnet ist
+    if (day > today || door.classList.contains('open')) {
+        return;
+    }
+
+    door.classList.add('open');
+    localStorage.setItem(`door-${day}`, 'open');
+    showPopup(day);
+}
+
+// Zeigt das Popup mit dem entsprechenden Text
+function showPopup(day) {
+    popupText.innerText = weihTexte[day - 1];
+    popup.style.display = 'block';
+    overlay.style.display = 'block';
+}
+
+// Schließt das Popup
+function closePopup() {
+    popup.style.display = 'none';
+    overlay.style.display = 'none';
+    if (popupText.innerText === "24. Dezember: Frohe Weihnachten!"){
+window.location.href='happy.html'
+}
+}
+
+</script>
+
+</body>
+</html>
