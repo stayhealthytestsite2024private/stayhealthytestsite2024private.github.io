@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - StayHealthy.at</title>
+    <script src="secure-admin.js" type="module"></script>
+    <link rel="favourites icon" href="images/favicon.ico">
+    <!-- Firebase Setup -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getFirestore, doc, getDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-aLANF3Waui3Df0mpOK55XqhuKGZu_Dc",
+            authDomain: "stayhealthyuserdatabase.firebaseapp.com",
+            projectId: "stayhealthyuserdatabase",
+            storageBucket: "stayhealthyuserdatabase.appspot.com",
+            messagingSenderId: "660807547495",
+            appId: "1:660807547495:web:f92cdd3b8e9e0d9160f2c2",
+            measurementId: "G-7KS7Z5X9HT"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Function to fetch the current status from Firestore
+        async function fetchStatus() {
+            const docRef = doc(db, 'data/status');
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const currentStatus = docSnap.data().memberstatus;
+                const shutdownReason = docSnap.data().shutdownReason || 'No reason provided';
+
+                document.getElementById('statusDisplay').innerText = currentStatus ? 'Active' : 'Closed';
+                document.getElementById('toggleSwitch').checked = currentStatus; // Set toggle state
+                document.getElementById('shutdownReason').innerText = shutdownReason;
+
+                updatePreview(currentStatus);
+            } else {
+                console.log("No such document!");
+            }
+        }
+
+        // Function to update the status in Firestore
+        async function updateStatus(newStatus, reason = '') {
+            const docRef = doc(db, 'data/status');
+            const currentTime = new Date().toISOString();
+
+            // Update Firestore with new status, reason, and log the change
+            await updateDoc(docRef, {
+                memberstatus: newStatus,
+                shutdownReason: reason,
+                statusLogs: arrayUnion({
+                    timestamp: currentTime,
+                    status: newStatus,
+                    reason: reason
+                })
+            });
+
+            // Update the UI
+            document.getElementById('statusDisplay').innerText = newStatus ? 'Active' : 'Closed';
+            document.getElementById('shutdownReason').innerText = reason || 'No reason provided';
+            updatePreview(newStatus);
+        }
+
+        // Function to update the embedded preview based on the status
+        function updatePreview(status) {
+            const previewFrame = document.getElementById('previewFrame');
+            previewFrame.classList.add('fade-out');
+            setTimeout(() => {
+                previewFrame.src = status ? 'member.html' : 'member-status-closed.html'; // Show appropriate page
+                previewFrame.classList.remove('fade-out');
+                previewFrame.classList.add('fade-in');
+            }, 300);
+        }
+
+        // Listen for the toggle switch and other input changes
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggleSwitch = document.getElementById('toggleSwitch');
+            toggleSwitch.addEventListener('change', function() {
+                const newStatus = toggleSwitch.checked;
+                const reason = document.getElementById('shutdownReasonInput').value;
+                updateStatus(newStatus, reason); // Update Firestore when toggled
+            });
+
+
+            fetchStatus(); // Load initial status
+
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e0f7fa; /* Light cyan background */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .admin-panel {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            text-align: center;
+            animation: slide-in 0.7s ease-out;
+        }
+
+        h1 {
+            color: #0077b6; /* Baby blue */
+        }
+
+        .toggle-container {
+            margin: 20px 0;
+        }
+
+        .toggle-label {
+            font-size: 18px;
+            margin-right: 10px;
+            color: #ff6b6b; /* Light red */
+        }
+
+        .status-display {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ff6b6b; /* Light red */
+        }
+
+        iframe {
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            height: 400px;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .fade-out {
+            opacity: 0;
+        }
+
+        .fade-in {
+            opacity: 1;
+        }
+
+        .toggle-switch input[type="checkbox"] {
+            display: none;
+        }
+
+        .toggle-switch label {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch label input:checked + .slider {
+            background-color: #0077b6; /* Baby blue for active status */
+        }
+
+        .toggle-switch label .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+
+        .toggle-switch label .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            background-color: white;
+            transition: 0.4s;
+            left: 4px;
+            bottom: 4px;
+        }
+
+        .toggle-switch input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .input-container input {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        #redirectButton, .redirectToMember {
+            background-color: #0077b6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+            margin-right: 10px; /* Space between buttons */
+        }
+
+        #redirectButton:hover, #redirectToMember:hover {
+            background-color: #005f86;
+        }
+
+        @keyframes slide-in {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        #statusLogs {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #statusLogs ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        #statusLogs li {
+            background-color: #f1f1f1;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 600px) {
+            iframe {
+                height: 250px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .admin-panel {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-panel">
+        <h1>Admin Panel</h1>
+
+        <!-- Current Status -->
+        <div class="status-display">
+            Current Status: <span id="statusDisplay">Loading...</span>
+        </div>
+
+        <!-- Status Toggle -->
+        <div class="toggle-container">
+            <span class="toggle-label">Toggle Status</span>
+            <div class="toggle-switch">
+                <label>
+                    <input type="checkbox" id="toggleSwitch">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Shutdown Reason Input -->
+        <div class="input-container">
+            <input type="text" id="shutdownReasonInput" placeholder="Enter shutdown reason (if any)">
+        </div>
+
+        <!-- Preview Frame -->
+        <iframe id="previewFrame" src="about:blank"></iframe>
+
+        <!-- Status Logs -->
+        <div id="statusLogs">
+            <h3>Status Logs</h3>
+            <ul>
+                <li id="shutdownReason">No reason provided.</li>
+                <!-- Other status logs will be dynamically inserted here -->
+            </ul>
+        </div>
+
+        <!-- Redirect Buttons -->
+        <button class="redirectToMember"onclick="window.location.href = 'member.html';">End Admin Session</button>
+    </div>
+
+</body>
+</html>
