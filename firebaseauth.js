@@ -42,7 +42,8 @@ event.preventDefault();
 const email=document.getElementById('remail').value;
 const password=document.getElementById('rpassword').value;
 const name=document.getElementById('rname').value;
-const vip=0
+const vip=0;
+const permShips = "None";
 
 const auth=getAuth()
 const db=getFirestore();
@@ -53,7 +54,8 @@ const user=userCredential.user;
 const userData={
     email: email,
     name: name,
-    vip: vip
+    vip: vip,
+    permShips: permShips
 };
 showMessage('Erfolgreich registriert!', 'signUpMessage')
 const docRef=doc(db, "users", user.uid);
