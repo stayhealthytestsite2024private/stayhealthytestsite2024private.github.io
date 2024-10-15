@@ -73,6 +73,7 @@ const firebaseConfig = {
             if(docSnap.exists()){
                 const userData=docSnap.data();
                 const userPermShips=userData.permShips;
+                
                 console.log(userPermShips)
                 document.getElementById('loggedUserName').innerText=userData.name;
                 document.getElementById('loggedUserEmail').innerText=userData.email;
